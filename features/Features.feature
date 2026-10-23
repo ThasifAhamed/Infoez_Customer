@@ -3,6 +3,7 @@ Feature: verifying Infoez Application
 Background:
     Given User navigate to the Infoez Login page
 
+
 #Create New User Account Page:
 Scenario Outline: Verify that user can create own account
 
@@ -201,7 +202,6 @@ Scenario Outline: Verify Sort by dropdown in Explore Page
            | Top rated   | Top rated result              |
            | Most popular| Most popular result           | 
 
-@lastScenario
 Scenario Outline: Verify Min rating dropdown in Explore Page
 
         When User enter email "customer@infoez.com" into email field
@@ -332,10 +332,6 @@ Scenario: Verify Logout option woeking fine
         And User clicks on profile icon in home page
         And User clicks on log out option 
         Then User should log out successfully and redirect to sign in page
-
-
-
-
 
 
 

@@ -10,6 +10,7 @@ export class CreateUserPage extends BasePage{
 
         this.RegisterPage_Customer_Radio = page.locator("//div[normalize-space()='Customer']")
         this.NameBox = page.locator("//input[@data-testid='register-name']")
+
         this.emailBox = page.locator("//input[@type='email']")
         this.Phone_Number_Box = page.locator("//input[@data-testid='register-phone']")
         this.password_Box = page.locator("//input[@type='password']")

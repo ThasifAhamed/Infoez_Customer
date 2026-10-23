@@ -1,0 +1,1 @@
+Test PASS: User selecter Customer radio

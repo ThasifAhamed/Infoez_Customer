@@ -1,0 +1,265 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: features\Features.feature.spec.js >> verifying Infoez Application >> Verify Business owner page add business >> Example #2
+- Location: .features-gen\features\Features.feature.spec.js:533:9
+
+# Error details
+
+```
+Test timeout of 30000ms exceeded.
+```
+
+```
+Error: locator.selectOption: Test timeout of 30000ms exceeded.
+Call log:
+  - waiting for locator('xpath=(//select[@aria-hidden=\'true\'])[2]')
+    - locator resolved to <select tabindex="-1" aria-hidden="true">…</select>
+  - attempting select option action
+    2 × waiting for element to be visible and enabled
+      - did not find some options
+    - retrying select option action
+    - waiting 20ms
+    2 × waiting for element to be visible and enabled
+      - did not find some options
+    - retrying select option action
+      - waiting 100ms
+    35 × waiting for element to be visible and enabled
+       - did not find some options
+     - retrying select option action
+       - waiting 500ms
+
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - link "Infoez Find Local" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e11]:
+          - generic [ref=e12]: Infoez
+          - generic [ref=e13]: Find Local
+      - navigation [ref=e14]:
+        - link "Explore" [ref=e15] [cursor=pointer]:
+          - /url: /search
+        - link "Near me" [ref=e16] [cursor=pointer]:
+          - /url: /map
+        - link "How it works" [ref=e17] [cursor=pointer]:
+          - /url: /how-it-works
+        - link "Pricing" [ref=e18] [cursor=pointer]:
+          - /url: /pricing
+      - button "R Ravi" [ref=e20] [cursor=pointer]:
+        - generic [ref=e21]: R
+        - generic [ref=e23]: Ravi
+  - main [ref=e24]:
+    - generic [ref=e25]:
+      - complementary [ref=e26]:
+        - link "Overview" [ref=e27] [cursor=pointer]:
+          - /url: /business/dashboard
+        - link "My Businesses" [ref=e33] [cursor=pointer]:
+          - /url: /business/dashboard/businesses
+        - link "Leads" [ref=e39] [cursor=pointer]:
+          - /url: /business/dashboard/leads
+        - link "Add Business" [ref=e43] [cursor=pointer]:
+          - /url: /business/dashboard/new
+      - generic [ref=e46]:
+        - heading "Add a business" [level=1] [ref=e47]
+        - generic [ref=e48]:
+          - generic [ref=e49]:
+            - text: Business name
+            - textbox [ref=e50]: Cafe Le
+          - generic [ref=e51]:
+            - text: Description
+            - textbox [active] [ref=e52]: Cozy cafe located
+          - generic [ref=e53]:
+            - text: Category
+            - combobox [ref=e54] [cursor=pointer]:
+              - generic: Cafes & Bakeries
+            - combobox [aria-hidden] [ref=e57]
+          - generic [ref=e58]:
+            - text: Price range
+            - combobox [ref=e59] [cursor=pointer]:
+              - generic: $$
+            - combobox [aria-hidden] [ref=e62]
+          - generic [ref=e63]:
+            - text: City
+            - textbox [ref=e64]
+          - generic [ref=e65]:
+            - text: Address
+            - textbox [ref=e66]
+          - generic [ref=e67]:
+            - text: Phone
+            - textbox [ref=e68]
+          - generic [ref=e69]:
+            - text: Email
+            - textbox [ref=e70]
+          - generic [ref=e71]:
+            - text: Website
+            - textbox [ref=e72]
+          - generic [ref=e73]:
+            - text: Hours
+            - textbox "Mon-Sun 9AM–9PM" [ref=e74]
+          - generic [ref=e75]:
+            - text: Services (comma separated)
+            - textbox "Haircut, Coloring, Bridal" [ref=e76]
+          - generic [ref=e77]:
+            - generic [ref=e78]:
+              - generic [ref=e79]:
+                - text: Location coordinates (optional)
+                - paragraph [ref=e80]: Helps customers find you on the map & near-me search.
+              - button "Use my location" [ref=e81] [cursor=pointer]
+            - generic [ref=e82]:
+              - spinbutton "Latitude" [ref=e83]
+              - spinbutton "Longitude" [ref=e84]
+          - generic [ref=e85]:
+            - text: Photos
+            - generic [ref=e88]:
+              - generic [ref=e93]:
+                - generic [ref=e94]: Drag & drop photos here
+                - paragraph [ref=e95]: JPG, PNG, WEBP — up to 8MB each · Max 8
+              - generic [ref=e96]:
+                - button "Choose files" [ref=e97] [cursor=pointer]
+                - button "Use camera" [ref=e98] [cursor=pointer]
+          - generic [ref=e99]:
+            - button "Create business" [ref=e100] [cursor=pointer]
+            - paragraph [ref=e101]: New listings require admin approval before going live.
+  - contentinfo [ref=e102]:
+    - generic [ref=e103]:
+      - generic [ref=e104]:
+        - generic [ref=e105]: Infoez
+        - paragraph [ref=e111]: Find Local. Choose Better. The trusted directory for verified local businesses and services.
+      - generic [ref=e112]:
+        - generic [ref=e113]: Discover
+        - list [ref=e114]:
+          - listitem [ref=e115]:
+            - link "All Businesses" [ref=e116] [cursor=pointer]:
+              - /url: /search
+          - listitem [ref=e117]:
+            - link "Featured" [ref=e118] [cursor=pointer]:
+              - /url: /search?featured=true
+          - listitem [ref=e119]:
+            - link "Top Rated" [ref=e120] [cursor=pointer]:
+              - /url: /search?sort=rating
+      - generic [ref=e121]:
+        - generic [ref=e122]: For Business
+        - list [ref=e123]:
+          - listitem [ref=e124]:
+            - link "Add your business" [ref=e125] [cursor=pointer]:
+              - /url: /register?role=business_owner
+          - listitem [ref=e126]:
+            - link "Pricing plans" [ref=e127] [cursor=pointer]:
+              - /url: /pricing
+          - listitem [ref=e128]:
+            - link "How claims work" [ref=e129] [cursor=pointer]:
+              - /url: /how-it-works
+      - generic [ref=e130]:
+        - generic [ref=e131]: Company
+        - list [ref=e132]:
+          - listitem [ref=e133]:
+            - link "How it works" [ref=e134] [cursor=pointer]:
+              - /url: /how-it-works
+          - listitem [ref=e135]:
+            - link "Pricing" [ref=e136] [cursor=pointer]:
+              - /url: /pricing
+          - listitem [ref=e137]:
+            - link "Contact" [ref=e138] [cursor=pointer]:
+              - /url: /business/dashboard/new
+    - generic [ref=e140]:
+      - paragraph [ref=e141]: © 2026 Infoez. All rights reserved.
+      - paragraph [ref=e142]: Find Local. Choose Better.
+  - region "Notifications alt+T"
+```
+
+# Test source
+
+```ts
+  1  | import {expect} from '@playwright/test'
+  2  | 
+  3  | export class BasePage{
+  4  |     /** @param {import('@playwright/test').Page} page */ 
+  5  |     constructor(page){
+  6  |         this.page = page
+  7  |     }
+  8  | 
+  9  |     //URL:
+  10 |     async openApp(url){
+  11 |         await this.page.goto(url);
+  12 |     }
+  13 | 
+  14 |     //Fill:
+  15 |     async fill(element, text){
+  16 |         await element.fill(text);
+  17 |     }
+  18 | 
+  19 |     //Click:
+  20 | 
+  21 |     async click(element) {
+  22 |         await element.waitFor({ state: 'visible', timeout: 15000 });
+  23 |         await element.click({ timeout: 15000 });
+  24 |     }
+  25 |     
+  26 | 
+  27 |     //Go Back page
+  28 |     async goBack(){
+  29 |         await this.page.goBack()
+  30 |     }
+  31 | 
+  32 |     //Scroll:
+  33 |     async scroll(element){
+  34 |         await element.scrollIntoViewIfNeeded()
+  35 |         await element.waitFor({ state: "visible" });
+  36 |         await expect(element).toBeVisible()
+  37 |     }
+  38 | 
+  39 |     //Scroll till top of the page 
+  40 |     async scrollTillTop(){
+  41 |         await this.page.evaluate(()=>window.scrollTo(0,0))
+  42 |     }
+  43 | 
+  44 |     /** @param {import('@playwright/test').Locator} element */ 
+  45 |     //HTML warning Text:
+  46 |     async htmlWarning(elements) {
+  47 |         const validationMessage = await elements.evaluate(el => el.validationMessage);
+  48 |         console.log("Validation Message:", validationMessage);
+  49 |         expect(validationMessage).not.toBe("");
+  50 |         await elements.press("Escape");
+  51 |     }
+  52 | 
+  53 |     //Confirm Dismiss Allert:
+  54 | 
+  55 |     async confirmAlert(text) {
+  56 |         this.page.once("dialog", async dialog => {
+  57 |             expect(dialog.type()).toBe("confirm");
+  58 |             expect(dialog.message()).toContain(text);
+  59 |             await dialog.accept();
+  60 |         })
+  61 |        
+  62 |     }
+  63 |     
+  64 |     async Color(element){
+  65 |         const color = await element.evaluate(element => {
+  66 |             return getComputedStyle(element).backgroundColor;})
+  67 |         console.log("background color:", color)
+  68 |     }
+  69 | 
+  70 |     
+  71 |     async single_Select_DropDow(element, text){
+  72 |         await element.selectOption(text)
+  73 |     }
+  74 | 
+  75 |     /** @param {import('@playwright/test').Locator} element */ 
+  76 |     async single_Select_DropDow_Value(element, text){
+  77 |         await element.selectOption({value: text})
+  78 |     }
+  79 | 
+  80 | }
+     |                   ^ Error: locator.selectOption: Test timeout of 30000ms exceeded.
+```

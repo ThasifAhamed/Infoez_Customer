@@ -1,0 +1,2 @@
+Test PASS: User selecter Customer radio
+Validation Message: Please fill out this field.

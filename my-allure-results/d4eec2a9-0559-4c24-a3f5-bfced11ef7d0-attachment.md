@@ -1,0 +1,94 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: features\Features.feature.spec.js >> verifying Infoez Application >> Verify Business owner page add business >> Example #2
+- Location: .features-gen\features\Features.feature.spec.js:533:9
+
+# Error details
+
+```
+Error: expect(page).toHaveURL(expected) failed
+
+Expected: "https://d2mojgetgp5xie.cloudfront.net/"
+Received: ""
+
+Call log:
+  - Expect "toHaveURL" with timeout 5000ms
+  - Protocol error (Runtime.evaluate): Internal server error, session closed.
+
+```
+
+# Test source
+
+```ts
+  1  | import { expect } from "@playwright/test";
+  2  | import { BasePage } from "./BasePage";
+  3  | 
+  4  | export class LoginPage extends BasePage{
+  5  |     /** @param {import('@playwright/test').Page} page */
+  6  |     constructor(page) {
+  7  |         super(page)
+  8  |         this.ParentPage_Signin_button = page.locator("//button[normalize-space()='Sign in']")
+  9  |         this.LoginPage_Email_Box = page.locator("//input[@id='email']")
+  10 |         this.LoginPage_Password_Box = page.locator("//input[@id='password']")
+  11 |         this.LoginPage_Signin_button = page.locator("//button[@type='submit']")
+  12 |         this.HomePage_welcomeAlert = page.locator("//div[contains(text(),'Welcome back!')]")
+  13 |         this.LoginPage_invalidCredentialsAlert = page.locator("//div[contains(text(),'Invalid credentials')]")
+  14 |     }
+  15 | 
+  16 |     async browserLaunch(URL) {
+  17 |         await this.openApp(URL)
+> 18 |         await expect(this.page).toHaveURL(URL)
+     |                                 ^ Error: expect(page).toHaveURL(expected) failed
+  19 |         await this.click(this.ParentPage_Signin_button)
+  20 |     }
+  21 | 
+  22 |     async fill_Email(email) {
+  23 |         await expect(this.LoginPage_Email_Box).toBeVisible()
+  24 |         await this.fill(this.LoginPage_Email_Box, email)
+  25 |         await expect(this.LoginPage_Email_Box).not.toBeEmpty()
+  26 |     }
+  27 | 
+  28 |     async fill_Password(password) {
+  29 |         await expect(this.LoginPage_Password_Box).toBeVisible()
+  30 |         await expect(this.LoginPage_Password_Box).toBeEmpty()
+  31 |         await this.fill(this.LoginPage_Password_Box, password)
+  32 |     }
+  33 | 
+  34 |     async click_Signin() {
+  35 |         await expect(this.LoginPage_Signin_button).toBeEnabled()
+  36 |         await this.click(this.LoginPage_Signin_button) 
+  37 |     }
+  38 | 
+  39 |     async homepageTitle(title) {
+  40 |         await expect(this.page).toHaveTitle(title)
+  41 |     }
+  42 | 
+  43 |     async verifyWelcomeAlert(text) {
+  44 |         await this.HomePage_welcomeAlert.waitFor({ state: 'visible' })
+  45 |         await expect(this.HomePage_welcomeAlert).toBeVisible()
+  46 |         await expect(this.HomePage_welcomeAlert).toContainText(text)
+  47 |         await expect(this.HomePage_welcomeAlert).not.toBeEmpty()
+  48 |     }
+  49 | 
+  50 |     async verifyInvalidAlert(expectedAlert) {
+  51 |         await this.LoginPage_invalidCredentialsAlert.waitFor({ state: 'visible' })
+  52 |         await expect(this.LoginPage_invalidCredentialsAlert).toBeVisible()
+  53 |         await expect(this.LoginPage_invalidCredentialsAlert).toContainText(expectedAlert)
+  54 |     }
+  55 | 
+  56 |     //HTML 5 Allert POP UP 
+  57 |     async verifyEmptyFields() {
+  58 |         const validationMessage = await this.LoginPage_Email_Box.evaluate(
+  59 |             (element) => element.validationMessage)
+  60 |         console.log("Validation Message:", validationMessage)
+  61 |         expect(validationMessage).toBe("Please fill out this field.")
+  62 |     }
+  63 | 
+  64 | }
+```

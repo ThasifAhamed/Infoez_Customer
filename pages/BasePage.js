@@ -67,9 +67,14 @@ export class BasePage{
         console.log("background color:", color)
     }
 
-    /** @param {import('@playwright/test').Locator} element */ 
-    async singleDD(element, text){
+    
+    async single_Select_DropDow(element, text){
         await element.selectOption(text)
+    }
+
+    /** @param {import('@playwright/test').Locator} element */ 
+    async single_Select_DropDow_Value(element, text){
+        await element.selectOption({value: text})
     }
 
 }

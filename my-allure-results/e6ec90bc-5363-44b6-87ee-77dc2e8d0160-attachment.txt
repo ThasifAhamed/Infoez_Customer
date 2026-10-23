@@ -1,0 +1,2 @@
+Test PASS: User selecter Customer radio
+Validation Message: Please include an '@' in the email address. 'thasif12345' is missing an '@'.
