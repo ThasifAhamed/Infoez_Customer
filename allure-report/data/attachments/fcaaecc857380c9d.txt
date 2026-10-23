@@ -1,0 +1,1 @@
+Test FAIL: Warning text is not visible

@@ -1,0 +1,2 @@
+Total plan cards: 4
+Total Choose plan buttons: 3

@@ -1,0 +1,1 @@
+Test Pass: Related products cards are visible in UI

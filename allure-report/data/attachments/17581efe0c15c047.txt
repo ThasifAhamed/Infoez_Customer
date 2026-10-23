@@ -1,0 +1,1 @@
+Test Pass: No business results are displayed.
