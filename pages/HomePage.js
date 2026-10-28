@@ -20,7 +20,7 @@ export class HomePage extends BasePage {
         //Home Page:
         //Category locators
         this.categoryText = page.locator("//h2[contains(text(),'Every category')]")
-        this.Restaurants = page.locator("//div[normalize-space()='Restaurants']")
+        this.categoryCards = page.locator("//a[contains(@class,'group rounded-2xl border border')]//div[@class='mt-3 font-display font-semibold']")
         this.Every_category_Cards = page.locator("//div[contains(@class,'mt-8 grid grid-cols-2')]/child::a//div[contains(@class,'mt-3 font-display')]");
 
         //Featured section locators
@@ -132,9 +132,10 @@ export class HomePage extends BasePage {
 
     //Click Restaurants category and verify results
     async category_cards_click() {
-        await expect(this.Restaurants).toBeVisible({timeout: 10000})
-        await this.click(this.Restaurants)
-        await expect(this.Homepage_result).toBeVisible({timeout: 10000})
+        const allCards = this.categoryCards;
+
+        await this.click(allCards.first())
+        await expect(this.Homepage_result).toBeVisible({ timeout: 10000 })
     }
 
     // Scroll to Featured This Week section

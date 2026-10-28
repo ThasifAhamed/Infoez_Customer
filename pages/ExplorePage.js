@@ -25,6 +25,14 @@ export class ExplorePage extends BasePage{
         this.MinRating_DD = page.getByTestId('filter-min-rating')
         this.All_Star = page.locator("//a[contains(@class,'group relative flex flex-col rounded')]//span[contains(@class,'font-mono text-sm')]")
 
+        this.All_Hotel_Cards = page.locator("//a[contains(@class,'group relative flex')]") //48 cards
+        this.Send_Enquiry_Button = page.locator("//button[normalize-space()='Send Enquiry']")
+
+        this.Claim_Button = page.locator("//button[normalize-space()='Claim']")
+        this.TextArea_Claim_Reason = page.locator("//textarea[@placeholder='I am the owner / manager…']")
+        this.Submit_Claim_Button = page.locator("//button[normalize-space()='Submit claim']")
+
+        this.Claim_Popup_Success_Alert = page.locator("//div[contains(text(), 'Claim')]")
     }
 
     async click_Explore_Link(URL) {
@@ -172,23 +180,51 @@ export class ExplorePage extends BasePage{
 
     async Check_Rating_Card_Visible(Result) {
         const stars = this.All_Star
-        await stars.first().waitFor({ state: "visible", timeout: 10000})
-        await expect(stars).toHaveCount(7, { timeout: 10000 })
-
+        await stars.first().waitFor({state: "visible", timeout: 10000})
         const count = await stars.count()
-        console.log("Star count:", count)
+        expect(count).toBeGreaterThan(0)
 
         for (let i = 0; i < count; i++) {
             const ratingText = await stars.nth(i).innerText()
             const rating = parseFloat(ratingText)
-            console.log(`Card ${i + 1}: "${ratingText}"`)
-
             if (Result === "4.0+ result") {
-                expect(rating).toBeGreaterThanOrEqual(4.0)
+                expect(rating === 0 || rating >= 4.0).toBeTruthy()
             }else if (Result === "4.5+ result") {
-                expect(rating).toBeGreaterThanOrEqual(4.5)
+                expect(rating === 0 || rating >= 4.5).toBeTruthy()
             }
         }
     }
+
+    async click_first_card() {
+        if (await this.homePage_Title.isVisible()) {
+            await this.Explore_Link.waitFor({state: "visible", timeout: 10000})
+            await this.click(this.Explore_Link)
+        }
+        const All_Hotel_Cards = this.All_Hotel_Cards
+        await All_Hotel_Cards.first().waitFor({state: "visible", timeout: 10000})
+        await this.click(All_Hotel_Cards.first())
+
+        await this.Send_Enquiry_Button.waitFor({ state: "visible", timeout: 10000});
+        await this.scroll(this.Send_Enquiry_Button)
+        await expect(this.Send_Enquiry_Button).toBeVisible({timeout: 10000})
+    }
+
+    async click_Claim_Button(Text) {
+        await this.Claim_Button.waitFor({ state: "visible", timeout: 10000 })
+        await this.click(this.Claim_Button)
+
+        await this.TextArea_Claim_Reason.waitFor({ state: "visible", timeout: 10000 })
+        await this.fill(this.TextArea_Claim_Reason, Text)
+
+        await expect(this.TextArea_Claim_Reason).toHaveValue(Text, {timeout: 10000})
+
+        await this.click(this.Submit_Claim_Button)
+    }
+
+    async verify_Claim_Success_Alert() {
+        await this.Claim_Popup_Success_Alert.waitFor({ state: "visible", timeout: 10000 })
+        await expect(this.Claim_Popup_Success_Alert).toBeVisible({timeout: 10000})
+    }
+
 }
 

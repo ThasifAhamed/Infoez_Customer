@@ -167,7 +167,7 @@ Scenario Outline: Verify location search box in Explore Page
         | Bengaluru   | success |
         | Pondicherry | fail    |
 
-   
+ 
 Scenario Outline: Verify category dropdown in Explore Page
 
         When User enter email "customer@infoez.com" into email field
@@ -178,17 +178,12 @@ Scenario Outline: Verify category dropdown in Explore Page
 
         Examples:
             | Options            | Result       | 
-            | Restaurants        | success      | 
-            | Cafes & Bakeries   | success      | 
-            | Beauty & Spa       | success      |
-            | Fitness & Wellness | fail         |
-            | Auto & Repair      | success      |
-            | Retail & Shopping  | success      |
-            | Education          | success      |
-            | Professional       | success      |
-            | Beauty clinic      | success      |
-
-
+            | Beauty clinic      | success      | 
+            | Pet Care           | success      | 
+            | Electronics        | success      |
+            | Restarunts         | success      |
+            | Yoga               | fail         |
+            
 Scenario Outline: Verify Sort by dropdown in Explore Page
 
         When User enter email "customer@infoez.com" into email field
@@ -214,6 +209,16 @@ Scenario Outline: Verify Min rating dropdown in Explore Page
             | Options   | Result        | 
             | 4.0+      | 4.0+ result   | 
             | 4.5+      | 4.5+ result   | 
+
+@lastScenario 
+Scenario: Verify Explore page Claim functionality
+
+        When User enter email "customer@infoez.com" into email field
+        And User enter password "Customer@123" into password field
+        And User clicked on Sign In button
+        And User click on Explore link and click on first card
+        And User click on Claim this business button and enter the reason and click on submit button
+        Then User should able to see the Claim success alert pop up
 
 #Pricing Page:
 Scenario: Verify Choose your plan in pricing Page without sign in

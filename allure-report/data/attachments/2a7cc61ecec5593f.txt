@@ -1,1 +1,0 @@
-Test Pass: Related products are visible in UI

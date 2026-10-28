@@ -85,22 +85,19 @@ export class ProfilePage extends BasePage {
     }
 
     async search_food(Food) {
-
         await expect(this.homePage_Title).toBeVisible({ timeout: 10000 })
         await this.click(this.Explore_Link)
-
         await expect(this.Explore_Search_Box).toBeVisible({ timeout: 10000 })
         await this.fill(this.Explore_Search_Box, Food)
         await expect(this.Explore_Search_Box).toHaveValue(Food)
-
         await this.click(this.Explore_searchButton)
 
-        // Here application taking time to load only cake card insted all cards coming so use filter
         const firstCakeCard = this.Business_Cards.filter({ hasText: new RegExp(Food, "i") }).first()
         await expect(firstCakeCard).toBeVisible({ timeout: 20000 })
 
-        await this.heart_svg.waitFor({ state: "visible", timeout: 10000});
-        await this.click(this.heart_svg)
+        const favoriteButton = firstCakeCard.getByRole("button", {name: "Toggle favorite"})
+        await expect(favoriteButton).toBeVisible({ timeout: 10000 })
+        await this.click(favoriteButton)
     }
 
     async product_Added(){

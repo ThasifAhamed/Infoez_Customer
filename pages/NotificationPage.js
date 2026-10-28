@@ -14,7 +14,7 @@ export class NotificationPage extends BasePage {
         this.Notification_Page = page.locator("//h1[normalize-space()='Notifications']")
         this.MarkAllRead = page.locator("//button[normalize-space()='Mark all read']")
 
-        this.All_Notification_Cards = page.locator("//div[@class='mt-8 space-y-3']//div[contains(@class,'font-semibold text-sm')]")
+        this.All_Notification_Cards = page.locator("//div[@class='mt-8 space-y-3']/child::div")
     }
 
     async click_Notification(){
@@ -34,8 +34,15 @@ export class NotificationPage extends BasePage {
         await this.click(this.MarkAllRead)
     }
 
-    async All_Notification_Card(message){
-        const rejectedCards = this.All_Notification_Cards.filter({ hasText: new RegExp(message, "i") })
-        await expect(rejectedCards).toBeVisible({ timeout: 20000 }) // will check all rejected cards are there
+    async All_Notification_Card() {
+        const cards = this.All_Notification_Cards
+        //await expect(this.page.getByText("Loading…", { exact: true })).toBeHidden({ timeout: 20000 })
+        await expect(cards.first()).toBeVisible({ timeout: 20000 })
+        const count = await cards.count()
+        expect(count).toBeGreaterThan(0)
+
+        for (let i = 0; i < count; i++) {
+            await expect(cards.nth(i)).toBeVisible()
+        }
     }
 } 

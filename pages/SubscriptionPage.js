@@ -44,16 +44,22 @@ export class SubscriptionPage extends BasePage{
     }
 
     async click_All_ChoosePlans() {
-        const choosePlans = this.ChoosePlans
-        const count = await choosePlans.count()
-        console.log("Total Choose plan buttons:", count)
-
+        const planCards = this.All_PlanCards
+        const count = await planCards.count()
         expect(count).toBeGreaterThan(0)
 
         for (let i = 0; i < count; i++) {
-            const choosePlan = choosePlans.nth(i)
-            await expect(choosePlan).toBeVisible({ timeout: 15000 })
-            await choosePlan.click()
+            await expect(planCards.nth(i)).toBeVisible({timeout: 10000})
+        }
+
+        const choosePlans = this.ChoosePlans
+        const choosePlansCount = await choosePlans.count()
+        expect(choosePlansCount).toBeGreaterThan(0)
+
+        for (let i = 0; i < choosePlansCount; i++) {
+            const choosePlanButton = choosePlans.nth(i)
+            await expect(choosePlanButton).toBeVisible({timeout: 10000})
+            await this.click(choosePlanButton)
         }
     }
 

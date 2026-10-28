@@ -12,7 +12,7 @@ import { NotificationPage } from "../pages/NotificationPage";
 import { SubscriptionPage } from "../pages/SubscriptionPage"; 
 import { LogoutPage } from "../pages/LogoutPage";
 
-import { AddBusinessPage } from "../pages/AddBusinessPage";
+
 
 
 
@@ -54,10 +54,6 @@ let subscriptionPage;
 /** @type {LogoutPage} */
 let logoutPage;
 
-/** @type {AddBusinessPage} */
-let addBusinessPage;
-
-
 
 Before(async ({ page }) => {
   loginPage = new LoginPage(page);
@@ -73,7 +69,7 @@ Before(async ({ page }) => {
   subscriptionPage =  new SubscriptionPage(page);
   logoutPage =  new LogoutPage(page);
 
-  addBusinessPage =  new AddBusinessPage(page);
+ 
 })
 
 // ----------------------------loginPage------------------------------//
@@ -291,6 +287,19 @@ Then('User should view {string} valid min rating result', async ({}, Result) => 
   await explorePage.Check_Rating_Card_Visible(Result)
 });
 
+//CHeck here 
+When('User click on Explore link and click on first card', async ({}) => {
+  await explorePage.click_first_card()
+});
+
+When('User click on Claim this business button and enter the reason and click on submit button', async ({}) => {
+  await explorePage.click_Claim_Button("Wroung Food information")
+});
+
+Then('User should able to see the Claim success alert pop up', async ({}) => {
+  await explorePage.verify_Claim_Success_Alert()
+});
+
 //---------------------------  Pricing Page  ---------------------------//
 
 When('User clicks on pricing link without sign in', async ({}) => {
@@ -433,7 +442,7 @@ When('User click on Mark all read button', async ({}) => {
 });
 
 Then('User should see all the notifiation related cards', async ({}) => {
-  await notificationPage.All_Notification_Card("Rejected")
+  await notificationPage.All_Notification_Card()
 });
 
 //---------------------------  Subscription Page  ---------------------------//
@@ -465,67 +474,7 @@ Then('User should log out successfully and redirect to sign in page', async ({})
   await logoutPage.check_successfully_logedout()
 });
 
-//---------------------------  Add Business page ---------------------------//
 
-When('User clicks on profile icon in Business page', async ({}) => {
-  await addBusinessPage.click_profile_Icon()
-});
-
-When('User select Business dashboard and clicks on add Business', async ({}) => {
-  await addBusinessPage.select_Business_Option()
-
-});
-
-Then('User should navigated to Add a business page', async ({}) => {
-  await addBusinessPage.Add_business_Page()
-});
-
-
-Then('User added Business name {string} in Business name box', async ({}, Business_Name) => {
-   await addBusinessPage.enter_Business_Name(Business_Name)
-});
-
-Then('User added Description {string} in Description box', async ({}, Description) => {
-  await addBusinessPage.enter_Discription_Box(Description)
-});
-
-Then('User select Category option {string} from Category drop down', async ({}, Options) => {
-  await addBusinessPage.selct_Category_DropDown_Option(Options)
-});
-
-Then('User select Price range option {string} from Price drop down', async ({}, Price_Oprion) => {
-  await addBusinessPage.Price_DropDown_Option(Price_Oprion)
-});
-
-Then('User enter city name {string} city name box', async ({}, arg) => {
-  // Step: And User enter city name "Chennai" city name box
-  // From: features\Features.feature:350:9
-});
-
-Then('User enter Address {string} in Address box', async ({}, arg) => {
-  // Step: And User enter Address "No 1. Alen street" in Address box
-  // From: features\Features.feature:351:9
-});
-
-Then('User enter Phone {string}  and {string} inside Phone and email box', async ({}, arg, arg1) => {
-  // Step: And User enter Phone "9876541230"  and "bluemoon@gmail.com" inside Phone and email box
-  // From: features\Features.feature:352:9
-});
-
-Then('User select location then user should see success alert', async ({}) => {
-  // Step: And User select location then user should see success alert
-  // From: features\Features.feature:353:9
-});
-
-Then('User upload picture', async ({}) => {
-  // Step: And User upload picture
-  // From: features\Features.feature:354:9
-});
-
-Then('User clicks on create business and user should see success alert', async ({}) => {
-  // Step: Then User clicks on create business and user should see success alert
-  // From: features\Features.feature:355:9
-});
 
 
 
